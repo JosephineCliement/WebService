@@ -61,3 +61,30 @@ public class Assi1_Resource
 }
 ================================================================================================================================================================================
 2. Create a Web Service where inside a method accept fisrtname and lastname from user and display the fullname on the web page.
+Ans)
+package pro1;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("page1")
+public class Ass2 {
+	
+@GET
+@Produces(MediaType.TEXT_PLAIN)
+
+public String getIt()
+{
+	
+	String fn="Rahul";
+	String ln="Sharma";
+	
+    return fn+" "+ln;
+}
+
+
+}
+
+=========================================================================================================================================================================
