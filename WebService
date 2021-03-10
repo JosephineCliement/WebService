@@ -60,3 +60,4 @@ public class Assi1_Resource
     	
 }
 ================================================================================================================================================================================
+2. Create a Web Service where inside a method accept fisrtname and lastname from user and display the fullname on the web page.
