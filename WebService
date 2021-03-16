@@ -114,7 +114,7 @@ public class Ass5 {
 
 public String getData(@MatrixParam("name") String name,@MatrixParam("salary") int salary)
 {
-	
+        System.out.println(name+" "+salary);
 	return name+" "+salary;
 
 	
