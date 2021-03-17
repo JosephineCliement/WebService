@@ -90,7 +90,154 @@ public String getIt()
 =========================================================================================================================================================================
 3. Create a Class as Customers. Cid, cname and qty are the members of this class. Create a resource which saves records of 5 products. Make a method which displays
    all records in the tabular form. Make a method which displays all records in XML form. Make a method which displays the record on the basis of quantity.
-===========================================================================================================================================================================
+   
+Ans)
+package org1;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Customers {
+	
+	int cid;
+	String name;
+	int qty;
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	public Customers(int cid, String name, int qty) {
+		super();
+		this.cid = cid;
+		this.name = name;
+		this.qty = qty;
+	}
+	public Customers() {
+		super();
+	}
+	
+	
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Resources
+package org1;
+
+import java.util.ArrayList;
+
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+
+
+
+@Path("Customer")
+public class Resources
+
+{
+
+	
+	List<Customers> list=new ArrayList<Customers>();
+
+	public Resources() 
+	
+	{
+		
+		list.add(new Customers(101,"Rahul",20));
+		list.add(new Customers(102,"Nisha",20));
+		list.add(new Customers(103,"Moni",20));
+		list.add(new Customers(104,"Harshal",50));
+		list.add(new Customers(105,"Uvi",70));
+		
+	}
+	
+	@GET
+	@Path("getcustomers")
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Customers> getPro()
+	{
+		return list;
+	}
+	
+	@GET
+	@Path("getcustHtml")
+	@Produces(MediaType.TEXT_HTML)
+	public List<Customers> getPrhtmlo()
+	{
+		return list;
+	}
+	
+	
+	public String getPro(@PathParam("cid") int cid)
+	
+	{
+		
+		System.out.println(cid);
+		
+		Iterator<Customers> l=list.iterator();
+		
+		for (Customers customer : list)
+		{
+			if(customer.getCid()==cid)
+			{
+				System.out.println(customer.getCid()+" "+customer.getName()+" "+customer.getQty());
+				
+				return "<table border=1><tr><td>"+customer.getCid()+"</td><td>"+customer.getName()+"</td><td>"+customer.getQty()+"</td></tr></table>";
+				
+			}
+		}
+		
+		return "<h1>RECORD NOT FOUND</h1>";
+	}
+	
+	@GET
+	@Path("{qty}")
+	@Produces(MediaType.TEXT_HTML)
+	public String getProd(@PathParam("qty") int qty)
+	
+	{
+		
+		System.out.println(qty);
+		
+		Iterator<Customers> l=list.iterator();
+		
+		for (Customers customer : list)
+		{
+			if(customer.getQty()==qty)
+			{
+				
+				System.out.println(customer.getCid()+" "+customer.getName()+" "+customer.getQty());
+					
+			}
+		}
+		
+		return "<h1>RECORD NOT FOUND</h1>";
+	}
+		
+}
+	
+===============================================================================================================================================================================	
 4. Create a form which takes user name and age in the textbox. If age is less than 10 and greater than 20 then display a message as "Not eligible to participate" else
     print a message "Welcome username ,you are Eligible".
 ===================================================================================================================================================================================
